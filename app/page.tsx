@@ -13,12 +13,12 @@ import Link from "next/link";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 
 const chartTooltipStyle = {
-  backgroundColor: "#1f2937",
-  border: "none",
+  backgroundColor: "#1a1b1e",
+  border: "1px solid #26272c",
   borderRadius: 12,
-  color: "#f3f4f6",
+  color: "#ededef",
   fontSize: 12,
-  boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
+  boxShadow: "0 8px 24px rgb(0 0 0 / 0.3)",
 };
 
 export default function DashboardPage() {
@@ -113,7 +113,7 @@ export default function DashboardPage() {
   const chartBarRadius = (i: number): [number, number, number, number] => i === subjectKeys.length - 1 ? [4, 4, 0, 0] : [0, 0, 0, 0];
 
   return (
-    <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-6">
+    <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-6 animate-in">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
@@ -126,7 +126,7 @@ export default function DashboardPage() {
           <div className="flex items-center gap-3">
             <span className="text-sm text-gray-500 dark:text-gray-400">Today&apos;s Progress</span>
             <div className="w-28 h-2 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
-              <div className="h-full bg-violet-500 rounded-full transition-all" style={{ width: `${completionPercent}%` }} />
+              <div className="h-full bg-amber-500 rounded-full transition-all" style={{ width: `${completionPercent}%` }} />
             </div>
             <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">{completionPercent}%</span>
           </div>
@@ -136,7 +136,7 @@ export default function DashboardPage() {
       {/* Quick Stats */}
       <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
         {[
-          { icon: Clock, label: "Study Hours", value: `${totalStudyHours}h`, sub: "This week", color: "text-violet-500" },
+          { icon: Clock, label: "Study Hours", value: `${totalStudyHours}h`, sub: "This week", color: "text-amber-500" },
           { icon: Dumbbell, label: "Workouts", value: gymThisWeek, sub: "This week", color: "text-emerald-500" },
           { icon: CheckCircle, label: "Habits", value: `${habitsToday}/${habitsTotal}`, sub: "Today", color: "text-amber-500" },
           { icon: Target, label: "Tasks", value: `${completedToday.length}/${todayBlocks.length}`, sub: "Completed", color: "text-blue-500" },
@@ -159,7 +159,7 @@ export default function DashboardPage() {
           <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200/60 dark:border-gray-800 p-5 shadow-sm">
             <div className="flex items-center justify-between mb-4">
               <h2 className="font-semibold text-gray-900 dark:text-gray-100">Today&apos;s Schedule</h2>
-              <Link href="/schedule" className="text-sm text-violet-600 dark:text-violet-400 flex items-center gap-1 hover:underline">
+              <Link href="/schedule" className="text-sm text-amber-600 dark:text-amber-400 flex items-center gap-1 hover:underline">
                 View all <ArrowUpRight size={14} />
               </Link>
             </div>
@@ -167,7 +167,7 @@ export default function DashboardPage() {
               <div className="text-center py-8">
                 <Calendar size={32} className="mx-auto text-gray-300 dark:text-gray-600 mb-3" />
                 <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">No schedule for today</p>
-                <Link href="/schedule" className="inline-flex items-center gap-1.5 text-sm text-violet-600 dark:text-violet-400 hover:underline">
+                <Link href="/schedule" className="inline-flex items-center gap-1.5 text-sm text-amber-600 dark:text-amber-400 hover:underline">
                   <Plus size={14} /> Create your first schedule
                 </Link>
               </div>
@@ -187,7 +187,7 @@ export default function DashboardPage() {
               <div className="text-center py-8">
                 <Clock size={32} className="mx-auto text-gray-300 dark:text-gray-600 mb-3" />
                 <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">No study data yet</p>
-                <Link href="/jee" className="inline-flex items-center gap-1.5 text-sm text-violet-600 dark:text-violet-400 hover:underline">
+                <Link href="/study" className="inline-flex items-center gap-1.5 text-sm text-amber-600 dark:text-amber-400 hover:underline">
                   <Plus size={14} /> Add subjects and topics
                 </Link>
               </div>
@@ -219,7 +219,7 @@ export default function DashboardPage() {
           <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200/60 dark:border-gray-800 p-5 shadow-sm">
             <div className="flex items-center justify-between mb-4">
               <h2 className="font-semibold text-gray-900 dark:text-gray-100">Subject Progress</h2>
-              <Link href="/analytics" className="text-sm text-violet-600 dark:text-violet-400 flex items-center gap-1 hover:underline">
+              <Link href="/analytics" className="text-sm text-amber-600 dark:text-amber-400 flex items-center gap-1 hover:underline">
                 Details <ArrowUpRight size={14} />
               </Link>
             </div>
@@ -227,7 +227,7 @@ export default function DashboardPage() {
               <div className="text-center py-8">
                 <BookOpen size={32} className="mx-auto text-gray-300 dark:text-gray-600 mb-3" />
                 <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">No subjects added yet</p>
-                <Link href="/jee" className="inline-flex items-center gap-1.5 text-sm text-violet-600 dark:text-violet-400 hover:underline">
+                <Link href="/study" className="inline-flex items-center gap-1.5 text-sm text-amber-600 dark:text-amber-400 hover:underline">
                   <Plus size={14} /> Add your first subject
                 </Link>
               </div>
@@ -257,13 +257,13 @@ export default function DashboardPage() {
           <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200/60 dark:border-gray-800 p-5 shadow-sm">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
-                <Sparkles size={16} className="text-violet-500" />
+                <Sparkles size={16} className="text-amber-500" />
                 <h2 className="font-semibold text-gray-900 dark:text-gray-100">Suggestions</h2>
               </div>
               <button
                 onClick={handleGenerateSuggestions}
                 disabled={aiLoading || !hasAnyData}
-                className="p-1.5 text-gray-400 hover:text-violet-500 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors disabled:opacity-50"
+                className="p-1.5 text-gray-400 hover:text-amber-500 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors disabled:opacity-50"
                 title={!hasAnyData ? "Add data first to get suggestions" : "Generate suggestions"}
               >
                 <RefreshCw size={14} className={aiLoading ? "animate-spin" : ""} />
@@ -293,7 +293,7 @@ export default function DashboardPage() {
                   <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">No suggestions yet</p>
                   <button
                     onClick={handleGenerateSuggestions}
-                    className="text-sm text-violet-600 dark:text-violet-400 hover:underline"
+                    className="text-sm text-amber-600 dark:text-amber-400 hover:underline"
                   >
                     Generate suggestions
                   </button>
@@ -305,7 +305,7 @@ export default function DashboardPage() {
                       <Zap size={14} className={`mt-0.5 shrink-0 ${rec.priority === "high" ? "text-red-500" : rec.priority === "medium" ? "text-amber-500" : "text-gray-400"}`} />
                       <div className="flex-1 min-w-0">
                         <p className="text-sm text-gray-700 dark:text-gray-300">{rec.message}</p>
-                        {rec.action && <p className="text-xs text-violet-600 dark:text-violet-400 mt-1">{rec.action}</p>}
+                        {rec.action && <p className="text-xs text-amber-600 dark:text-amber-400 mt-1">{rec.action}</p>}
                       </div>
                       <button onClick={() => dismissSuggestion(rec.id)} className="opacity-0 group-hover:opacity-100 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-opacity">
                         <AlertTriangle size={12} />
@@ -352,11 +352,11 @@ export default function DashboardPage() {
             <h2 className="font-semibold text-gray-900 dark:text-gray-100 mb-3">Quick Actions</h2>
             <div className="grid grid-cols-2 gap-2">
               {[
-                { href: "/jee", label: "Add Subject", icon: BookOpen, color: "text-indigo-500" },
-                { href: "/schedule", label: "Add Schedule", icon: Calendar, color: "text-violet-500" },
+                { href: "/study", label: "Study Hub", icon: BookOpen, color: "text-indigo-500" },
+                { href: "/schedule", label: "Add Schedule", icon: Calendar, color: "text-amber-500" },
                 { href: "/gym", label: "Log Workout", icon: Dumbbell, color: "text-emerald-500" },
                 { href: "/habits", label: "Track Habits", icon: CheckCircle, color: "text-amber-500" },
-                { href: "/notes", label: "Add Note", icon: FileText, color: "text-blue-500" },
+                { href: "/study", label: "Study Hub", icon: FileText, color: "text-blue-500" },
                 { href: "/analytics", label: "Analytics", icon: TrendingUp, color: "text-rose-500" },
               ].map((action) => (
                 <Link

@@ -1,50 +1,174 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f9fafb;
-  --foreground: #111827;
+  --background: #f8f9fb;
+  --foreground: #1a1b1e;
+  --surface: #ffffff;
+  --surface-alt: #f3f4f6;
+  --border: #e5e7eb;
+  --border-subtle: #f0f0f2;
+  --accent: #d97706;
+  --accent-light: #fef3c7;
+  --accent-hover: #b45309;
+  --text-secondary: #6b7280;
+  --text-tertiary: #9ca3af;
 }
 
 .dark {
-  --background: #030712;
-  --foreground: #f3f4f6;
+  --background: #0a0a0c;
+  --foreground: #ededef;
+  --surface: #141517;
+  --surface-alt: #1a1b1f;
+  --border: #26272c;
+  --border-subtle: #1e1f24;
+  --accent: #f59e0b;
+  --accent-light: #78350f;
+  --accent-hover: #d97706;
+  --text-secondary: #9ca3af;
+  --text-tertiary: #6b7280;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
   --font-mono: var(--font-geist-mono);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* ── Scrollbar ── */
 * {
   scrollbar-width: thin;
   scrollbar-color: #d1d5db transparent;
 }
-
 .dark * {
-  scrollbar-color: #374151 transparent;
+  scrollbar-color: #2a2b30 transparent;
 }
 
+/* ── Number inputs ── */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
 input[type="number"] {
   -moz-appearance: textfield;
 }
 
-/* Chart tooltip styling */
+/* ── Charts ── */
 .recharts-tooltip-wrapper {
   outline: none !important;
+}
+
+/* ── Animations ── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUpSheet {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-in {
+  animation: slideUp 0.35s ease-out both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out both;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.2s ease-out both;
+}
+
+.animate-slide-up-sheet {
+  animation: slideUpSheet 0.3s cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+/* Stagger animation for cards */
+.animate-in > * {
+  animation: slideUp 0.4s ease-out both;
+}
+.animate-in > *:nth-child(1) { animation-delay: 0ms; }
+.animate-in > *:nth-child(2) { animation-delay: 50ms; }
+.animate-in > *:nth-child(3) { animation-delay: 100ms; }
+.animate-in > *:nth-child(4) { animation-delay: 150ms; }
+.animate-in > *:nth-child(5) { animation-delay: 200ms; }
+.animate-in > *:nth-child(6) { animation-delay: 250ms; }
+
+/* ── Interactive states ── */
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── Range input styling ── */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 9999px;
+  outline: none;
+}
+.dark input[type="range"] {
+  background: #26272c;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #f59e0b;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.15);
+}
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #f59e0b;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.15);
+}
+
+/* ── Safe area for mobile ── */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ── Glassmorphism ── */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.dark .glass {
+  background: rgba(20, 21, 23, 0.8);
 }

@@ -12,7 +12,7 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, L
 
 const CATEGORY_COLORS: Record<string, string> = {
   routine: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
-  study: "bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-400",
+  study: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
   fitness: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400",
   wellness: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
   focus: "bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400",
@@ -137,7 +137,7 @@ export default function HabitsPage() {
   ).length;
 
   return (
-    <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-6">
+    <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-6 animate-in">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Habit Tracker</h1>
@@ -145,7 +145,7 @@ export default function HabitsPage() {
         </div>
         <button
           onClick={() => setShowAdd(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-violet-600 text-white rounded-xl text-sm font-medium hover:bg-violet-700 transition-colors"
+          className="flex items-center gap-2 px-4 py-2 bg-amber-500 text-white rounded-xl text-sm font-medium hover:bg-amber-600 transition-colors"
         >
           <Plus size={16} /> Add Habit
         </button>
@@ -188,13 +188,13 @@ export default function HabitsPage() {
               onClick={() => setSelectedDate(date)}
               className={`flex-1 min-w-[50px] py-2 px-1 rounded-lg text-center transition-colors ${
                 isSelected
-                  ? "bg-violet-600 text-white"
+                  ? "bg-amber-500 text-white"
                   : isToday
-                  ? "bg-violet-50 dark:bg-violet-500/10"
+                  ? "bg-amber-50 dark:bg-amber-500/10"
                   : "hover:bg-gray-50 dark:hover:bg-gray-800/50"
               }`}
             >
-              <p className={`text-[10px] ${isSelected ? "text-violet-200" : "text-gray-400"}`}>
+              <p className={`text-[10px] ${isSelected ? "text-amber-200" : "text-gray-400"}`}>
                 {new Date(date + "T00:00:00").toLocaleDateString("en-US", { weekday: "short" })}
               </p>
               <p className={`text-lg font-bold ${isSelected ? "text-white" : "text-gray-900 dark:text-gray-100"}`}>
@@ -203,7 +203,7 @@ export default function HabitsPage() {
               <div className="flex justify-center gap-0.5 mt-1">
                 {Array.from({ length: Math.min(total, 5) }).map((_, i) => (
                   <div key={i} className={`w-1 h-1 rounded-full ${
-                    i < completed ? (isSelected ? "bg-white" : "bg-emerald-400") : (isSelected ? "bg-violet-300" : "bg-gray-300 dark:bg-gray-600")
+                    i < completed ? (isSelected ? "bg-white" : "bg-emerald-400") : (isSelected ? "bg-amber-300" : "bg-gray-300 dark:bg-gray-600")
                   }`} />
                 ))}
               </div>
@@ -245,7 +245,7 @@ export default function HabitsPage() {
                         ? "border-gray-200 dark:border-gray-700 opacity-40 cursor-not-allowed"
                         : isCompleted
                         ? "bg-emerald-500 border-emerald-500 text-white"
-                        : "border-gray-300 dark:border-gray-600 hover:border-violet-400"
+                        : "border-gray-300 dark:border-gray-600 hover:border-amber-400"
                     }`}
                   >
                     {isCompleted && <CheckCircle size={14} />}
@@ -291,8 +291,8 @@ export default function HabitsPage() {
             <BarChart data={weeklyCompletion}>
               <XAxis dataKey="day" tick={{ fontSize: 11 }} axisLine={false} tickLine={false} />
               <YAxis tick={{ fontSize: 11 }} axisLine={false} tickLine={false} domain={[0, 100]} />
-              <Tooltip contentStyle={{ backgroundColor: "#18181b", border: "none", borderRadius: 8, color: "#fff", fontSize: 12 }} />
-              <Bar dataKey="rate" fill="#8b5cf6" radius={[4, 4, 0, 0]} />
+              <Tooltip contentStyle={{ backgroundColor: "#1a1b1e", border: "1px solid #26272c", borderRadius: 12, color: "#ededef", fontSize: 12, boxShadow: "0 8px 24px rgb(0 0 0 / 0.3)" }} />
+              <Bar dataKey="rate" fill="#d97706" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -302,7 +302,7 @@ export default function HabitsPage() {
             <LineChart data={monthlyData}>
               <XAxis dataKey="date" tick={{ fontSize: 10 }} axisLine={false} tickLine={false} />
               <YAxis tick={{ fontSize: 11 }} axisLine={false} tickLine={false} domain={[0, 100]} />
-              <Tooltip contentStyle={{ backgroundColor: "#18181b", border: "none", borderRadius: 8, color: "#fff", fontSize: 12 }} />
+              <Tooltip contentStyle={{ backgroundColor: "#1a1b1e", border: "1px solid #26272c", borderRadius: 12, color: "#ededef", fontSize: 12, boxShadow: "0 8px 24px rgb(0 0 0 / 0.3)" }} />
               <Line type="monotone" dataKey="rate" stroke="#10b981" strokeWidth={2} dot={false} />
             </LineChart>
           </ResponsiveContainer>
@@ -334,7 +334,7 @@ export default function HabitsPage() {
               value={newHabit.name}
               onChange={(e) => setNewHabit({ ...newHabit, name: e.target.value })}
               placeholder="e.g. Read 30 minutes"
-              className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-violet-500"
+              className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-amber-500"
             />
           </div>
           <div>
@@ -342,7 +342,7 @@ export default function HabitsPage() {
             <select
               value={newHabit.category}
               onChange={(e) => setNewHabit({ ...newHabit, category: e.target.value })}
-              className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-violet-500"
+              className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-amber-500"
             >
               <option value="routine">Routine</option>
               <option value="study">Study</option>
@@ -355,7 +355,7 @@ export default function HabitsPage() {
           <button
             onClick={handleAdd}
             disabled={!newHabit.name.trim()}
-            className="w-full py-2.5 bg-violet-600 text-white rounded-xl text-sm font-medium hover:bg-violet-700 transition-colors disabled:opacity-50"
+            className="w-full py-2.5 bg-amber-500 text-white rounded-xl text-sm font-medium hover:bg-amber-600 transition-colors disabled:opacity-50"
           >
             Add Habit
           </button>

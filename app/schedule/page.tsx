@@ -71,7 +71,7 @@ export default function SchedulePage() {
   };
 
   return (
-    <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-6">
+    <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-6 animate-in">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Schedule Planner</h1>
@@ -79,7 +79,7 @@ export default function SchedulePage() {
         </div>
         <button
           onClick={() => setShowAdd(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-violet-600 text-white rounded-xl text-sm font-medium hover:bg-violet-700 transition-colors"
+          className="flex items-center gap-2 px-4 py-2 bg-amber-500 text-white rounded-xl text-sm font-medium hover:bg-amber-600 transition-colors"
         >
           <Plus size={16} /> Add Block
         </button>
@@ -103,13 +103,13 @@ export default function SchedulePage() {
                 onClick={() => setSelectedDay(date)}
                 className={`flex-1 min-w-[60px] py-2 px-1 rounded-lg text-center transition-colors ${
                   isSelected
-                    ? "bg-violet-600 text-white"
+                    ? "bg-amber-500 text-white"
                     : isToday
-                    ? "bg-violet-50 dark:bg-violet-500/10 text-violet-700 dark:text-violet-400"
+                    ? "bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400"
                     : "hover:bg-gray-50 dark:hover:bg-gray-800/50"
                 }`}
               >
-                <p className={`text-[10px] uppercase ${isSelected ? "text-violet-200" : "text-gray-400"}`}>
+                <p className={`text-[10px] uppercase ${isSelected ? "text-amber-200" : "text-gray-400"}`}>
                   {new Date(date + "T00:00:00").toLocaleDateString("en-US", { weekday: "short" })}
                 </p>
                 <p className={`text-lg font-semibold ${isSelected ? "text-white" : "text-gray-900 dark:text-gray-100"}`}>
@@ -121,7 +121,7 @@ export default function SchedulePage() {
                       <div
                         key={i}
                         className={`w-1 h-1 rounded-full ${
-                          b.status === "completed" ? "bg-emerald-400" : b.status === "skipped" ? "bg-red-400" : isSelected ? "bg-violet-300" : "bg-gray-300 dark:bg-gray-600"
+                          b.status === "completed" ? "bg-emerald-400" : b.status === "skipped" ? "bg-red-400" : isSelected ? "bg-amber-300" : "bg-gray-300 dark:bg-gray-600"
                         }`}
                       />
                     ))}
@@ -183,7 +183,7 @@ export default function SchedulePage() {
                   <div key={rec.id} className="p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50">
                     <p className="text-sm text-gray-700 dark:text-gray-300">{rec.message}</p>
                     {rec.action && (
-                      <p className="text-xs text-violet-600 dark:text-violet-400 mt-1">{rec.action}</p>
+                      <p className="text-xs text-amber-600 dark:text-amber-400 mt-1">{rec.action}</p>
                     )}
                   </div>
                 ))
@@ -236,7 +236,7 @@ export default function SchedulePage() {
               <select
                 value={newBlock.type}
                 onChange={(e) => setNewBlock({ ...newBlock, type: e.target.value as ScheduleBlock["type"] })}
-                className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-violet-500"
+                className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-amber-500"
               >
                 {typeOptions.map((t) => (
                   <option key={t} value={t}>{t.replace("-", " ").replace(/\b\w/g, (c) => c.toUpperCase())}</option>
@@ -252,7 +252,7 @@ export default function SchedulePage() {
                   <select
                     value={newBlock.subject}
                     onChange={(e) => setNewBlock({ ...newBlock, subject: e.target.value as Subject })}
-                    className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-violet-500"
+                    className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-amber-500"
                   >
                     {availableSubjects.map((s) => (
                       <option key={s} value={s}>{s}</option>
@@ -269,7 +269,7 @@ export default function SchedulePage() {
                 type="time"
                 value={newBlock.startTime}
                 onChange={(e) => setNewBlock({ ...newBlock, startTime: e.target.value })}
-                className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-violet-500"
+                className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-amber-500"
               />
             </div>
             <div>
@@ -278,7 +278,7 @@ export default function SchedulePage() {
                 type="time"
                 value={newBlock.endTime}
                 onChange={(e) => setNewBlock({ ...newBlock, endTime: e.target.value })}
-                className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-violet-500"
+                className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-amber-500"
               />
             </div>
           </div>
@@ -288,12 +288,12 @@ export default function SchedulePage() {
               value={newBlock.notes}
               onChange={(e) => setNewBlock({ ...newBlock, notes: e.target.value })}
               rows={2}
-              className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-violet-500 resize-none"
+              className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-amber-500 resize-none"
             />
           </div>
           <button
             onClick={handleAdd}
-            className="w-full py-2.5 bg-violet-600 text-white rounded-xl text-sm font-medium hover:bg-violet-700 transition-colors"
+            className="w-full py-2.5 bg-amber-500 text-white rounded-xl text-sm font-medium hover:bg-amber-600 transition-colors"
           >
             Add Block
           </button>

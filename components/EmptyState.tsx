@@ -1,9 +1,19 @@
-export default function EmptyState({ icon, title, description }: { icon?: React.ReactNode; title: string; description?: string }) {
+"use client";
+
+import { ReactNode } from "react";
+
+interface EmptyStateProps {
+  icon?: ReactNode;
+  title: string;
+  description?: string;
+}
+
+export default function EmptyState({ icon, title, description }: EmptyStateProps) {
   return (
-    <div className="flex flex-col items-center justify-center py-16 text-center">
-      {icon && <div className="text-gray-300 dark:text-gray-600 mb-4">{icon}</div>}
-      <h3 className="text-gray-500 dark:text-gray-400 font-medium">{title}</h3>
-      {description && <p className="text-sm text-gray-400 dark:text-gray-500 mt-1.5 max-w-sm">{description}</p>}
+    <div className="text-center py-8 animate-fade-in">
+      {icon && <div className="flex justify-center mb-3 text-gray-300 dark:text-gray-600">{icon}</div>}
+      <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{title}</p>
+      {description && <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">{description}</p>}
     </div>
   );
 }

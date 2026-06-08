@@ -159,7 +159,7 @@ export default function GymPage() {
   const viewedSession = data.gymSessions.find((s) => s.id === showView);
 
   return (
-    <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-6">
+    <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-6 animate-in">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Gym & Hybrid Athlete</h1>
@@ -167,7 +167,7 @@ export default function GymPage() {
         </div>
         <button
           onClick={() => setShowAdd(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-violet-600 text-white rounded-xl text-sm font-medium hover:bg-violet-700 transition-colors"
+          className="flex items-center gap-2 px-4 py-2 bg-amber-500 text-white rounded-xl text-sm font-medium hover:bg-amber-600 transition-colors"
         >
           <Plus size={16} /> Log Workout
         </button>
@@ -181,7 +181,7 @@ export default function GymPage() {
                 <Dumbbell size={14} />
                 <span className="capitalize">{type}</span>
               </div>
-              <p className="text-2xl font-bold text-violet-500">{count}</p>
+              <p className="text-2xl font-bold text-amber-500">{count}</p>
             </div>
           ))}
           <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-800 p-4">
@@ -224,8 +224,8 @@ export default function GymPage() {
               <LineChart data={selectedExerciseData}>
                 <XAxis dataKey="date" tick={{ fontSize: 11 }} axisLine={false} tickLine={false} />
                 <YAxis tick={{ fontSize: 11 }} axisLine={false} tickLine={false} />
-                <Tooltip contentStyle={{ backgroundColor: "#18181b", border: "none", borderRadius: 8, color: "#fff", fontSize: 12 }} />
-                <Line type="monotone" dataKey="weight" stroke="#6366f1" strokeWidth={2} dot={{ r: 3 }} />
+                <Tooltip contentStyle={{ backgroundColor: "#1a1b1e", border: "1px solid #26272c", borderRadius: 12, color: "#ededef", fontSize: 12, boxShadow: "0 8px 24px rgb(0 0 0 / 0.3)" }} />
+                <Line type="monotone" dataKey="weight" stroke="#f59e0b" strokeWidth={2} dot={{ r: 3 }} />
               </LineChart>
             </ResponsiveContainer>
           ) : (
@@ -243,8 +243,8 @@ export default function GymPage() {
               <BarChart data={weeklyVolume}>
                 <XAxis dataKey="day" tick={{ fontSize: 11 }} axisLine={false} tickLine={false} />
                 <YAxis tick={{ fontSize: 11 }} axisLine={false} tickLine={false} />
-                <Tooltip contentStyle={{ backgroundColor: "#18181b", border: "none", borderRadius: 8, color: "#fff", fontSize: 12 }} />
-                <Bar dataKey="sets" fill="#8b5cf6" radius={[4, 4, 0, 0]} />
+                <Tooltip contentStyle={{ backgroundColor: "#1a1b1e", border: "1px solid #26272c", borderRadius: 12, color: "#ededef", fontSize: 12, boxShadow: "0 8px 24px rgb(0 0 0 / 0.3)" }} />
+                <Bar dataKey="sets" fill="#d97706" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           ) : (
@@ -259,7 +259,7 @@ export default function GymPage() {
               <LineChart data={bodyweightData}>
                 <XAxis dataKey="date" tick={{ fontSize: 11 }} axisLine={false} tickLine={false} />
                 <YAxis tick={{ fontSize: 11 }} axisLine={false} tickLine={false} domain={["dataMin - 1", "dataMax + 1"]} />
-                <Tooltip contentStyle={{ backgroundColor: "#18181b", border: "none", borderRadius: 8, color: "#fff", fontSize: 12 }} />
+                <Tooltip contentStyle={{ backgroundColor: "#1a1b1e", border: "1px solid #26272c", borderRadius: 12, color: "#ededef", fontSize: 12, boxShadow: "0 8px 24px rgb(0 0 0 / 0.3)" }} />
                 <Line type="monotone" dataKey="weight" stroke="#f59e0b" strokeWidth={2} dot={{ r: 3 }} />
               </LineChart>
             </ResponsiveContainer>
@@ -327,8 +327,8 @@ export default function GymPage() {
                   }}
                   className={`text-xs px-2.5 py-1 rounded-full transition-colors ${
                     sessionType === t.toLowerCase() && !customTypeInput
-                      ? "bg-violet-600 text-white"
-                      : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-violet-100 dark:hover:bg-violet-900/30 hover:text-violet-600"
+                      ? "bg-amber-500 text-white"
+                      : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-amber-100 dark:hover:bg-amber-900/30 hover:text-amber-600"
                   }`}
                 >
                   {t}
@@ -350,7 +350,7 @@ export default function GymPage() {
               />
               <button
                 onClick={addExerciseFromInput}
-                className="px-3 py-2 bg-violet-600 text-white rounded-lg text-sm font-medium hover:bg-violet-700 transition-colors"
+                className="px-3 py-2 bg-amber-500 text-white rounded-lg text-sm font-medium hover:bg-amber-600 transition-colors"
               >
                 <Plus size={16} />
               </button>
@@ -420,7 +420,7 @@ export default function GymPage() {
               className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-sm text-gray-900 dark:text-gray-100 resize-none" />
           </div>
           <button onClick={handleAdd}
-            className="w-full py-2.5 bg-violet-600 text-white rounded-xl text-sm font-medium hover:bg-violet-700 transition-colors">
+            className="w-full py-2.5 bg-amber-500 text-white rounded-xl text-sm font-medium hover:bg-amber-600 transition-colors">
             Save Workout
           </button>
         </div>

@@ -10,11 +10,11 @@ import {
 } from "recharts";
 import { TrendingUp, Clock, Target, Activity, BookOpen, Dumbbell, CheckCircle, Info } from "lucide-react";
 
-const PIE_COLORS = ["#6366f1", "#10b981", "#8b5cf6", "#f59e0b", "#ef4444", "#06b6d4", "#ec4899", "#14b8a6"];
+const PIE_COLORS = ["#f59e0b", "#10b981", "#d97706", "#6366f1", "#ef4444", "#06b6d4", "#ec4899", "#14b8a6"];
 
 const chartTooltipStyle = {
-  backgroundColor: "#1f2937", border: "none", borderRadius: 12,
-  color: "#f3f4f6", fontSize: 12, boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
+  backgroundColor: "#1a1b1e", border: "1px solid #26272c", borderRadius: 12,
+  color: "#ededef", fontSize: 12, boxShadow: "0 8px 24px rgb(0 0 0 / 0.3)",
 };
 
 function computeProductivityScore(data: ReturnType<typeof useData>["data"]) {
@@ -133,14 +133,14 @@ export default function AnalyticsPage() {
   const hasSubjects = subjects.length > 0;
 
   return (
-    <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-6">
+    <div className="animate-in p-4 md:p-8 max-w-7xl mx-auto space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Analytics</h1>
         <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Performance overview and trends</p>
       </div>
 
       {/* Productivity Score */}
-      <div className="bg-gradient-to-r from-violet-600 to-indigo-600 rounded-2xl p-6 text-white shadow-lg">
+      <div className="bg-gradient-to-r from-amber-500 to-orange-600 rounded-2xl p-6 text-white shadow-lg">
         <div className="flex items-center gap-3 mb-3">
           <Target size={20} />
           <h2 className="text-lg font-semibold">Productivity Score</h2>
@@ -187,7 +187,7 @@ export default function AnalyticsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200/60 dark:border-gray-800 p-5 shadow-sm">
           <div className="flex items-center gap-2 mb-4">
-            <BookOpen size={16} className="text-violet-500" />
+            <BookOpen size={16} className="text-amber-500" />
             <h2 className="font-semibold text-gray-900 dark:text-gray-100">Study Hours per Subject</h2>
           </div>
           {studySubjectKeys.length > 0 ? (
@@ -216,7 +216,7 @@ export default function AnalyticsPage() {
               <RadarChart data={topicRadar}>
                 <PolarGrid stroke="#e5e7eb" />
                 <PolarAngleAxis dataKey="subject" tick={{ fontSize: 12 }} />
-                <Radar name="Strength" dataKey="avgStrength" stroke="#6366f1" fill="#6366f1" fillOpacity={0.3} />
+                <Radar name="Strength" dataKey="avgStrength" stroke="#f59e0b" fill="#f59e0b" fillOpacity={0.3} />
                 <Radar name="Accuracy" dataKey="avgAccuracy" stroke="#10b981" fill="#10b981" fillOpacity={0.2} />
               </RadarChart>
             </ResponsiveContainer>
@@ -281,7 +281,7 @@ export default function AnalyticsPage() {
         <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200/60 dark:border-gray-800 p-5 shadow-sm">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
-              <TrendingUp size={16} className="text-indigo-500" />
+              <TrendingUp size={16} className="text-amber-500" />
               <h2 className="font-semibold text-gray-900 dark:text-gray-100">Strength Progression</h2>
             </div>
             {uniqueExercises.length > 0 && (
@@ -303,7 +303,7 @@ export default function AnalyticsPage() {
                 <XAxis dataKey="date" tick={{ fontSize: 11 }} axisLine={false} tickLine={false} />
                 <YAxis tick={{ fontSize: 11 }} axisLine={false} tickLine={false} domain={["dataMin - 5", "dataMax + 5"]} />
                 <Tooltip contentStyle={chartTooltipStyle} />
-                <Line type="monotone" dataKey="weight" stroke="#6366f1" strokeWidth={2} dot={{ r: 3 }} />
+                <Line type="monotone" dataKey="weight" stroke="#f59e0b" strokeWidth={2} dot={{ r: 3 }} />
               </LineChart>
             </ResponsiveContainer>
           ) : (
@@ -316,7 +316,7 @@ export default function AnalyticsPage() {
         {/* Questions Distribution */}
         <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200/60 dark:border-gray-800 p-5 shadow-sm">
           <div className="flex items-center gap-2 mb-4">
-            <Clock size={16} className="text-indigo-500" />
+            <Clock size={16} className="text-amber-500" />
             <h2 className="font-semibold text-gray-900 dark:text-gray-100">Questions Distribution</h2>
           </div>
           {hasSubjects ? (

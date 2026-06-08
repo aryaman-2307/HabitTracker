@@ -41,7 +41,7 @@ export default function SignupPage() {
 
   if (success) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950 px-4">
+      <div className="animate-in min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 via-amber-50/30 to-gray-50 dark:from-[#0a0a0c] dark:via-amber-950/10 dark:to-[#0a0a0c] px-4">
         <div className="w-full max-w-md text-center">
           <div className="w-12 h-12 rounded-xl bg-emerald-500 flex items-center justify-center mx-auto mb-4">
             <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -52,7 +52,7 @@ export default function SignupPage() {
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
             We sent a confirmation link to <span className="font-medium text-gray-700 dark:text-gray-300">{email}</span>
           </p>
-          <Link href="/login" className="inline-block mt-6 text-sm text-violet-600 dark:text-violet-400 font-medium hover:underline">
+          <Link href="/login" className="inline-block mt-6 text-sm text-amber-600 dark:text-amber-400 font-medium hover:underline">
             Back to login
           </Link>
         </div>
@@ -61,11 +61,11 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950 px-4">
+    <div className="animate-in min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 via-amber-50/30 to-gray-50 dark:from-[#0a0a0c] dark:via-amber-950/10 dark:to-[#0a0a0c] px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center mx-auto mb-4">
-            <span className="text-white text-xl font-bold">V</span>
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center mx-auto mb-4">
+            <span className="text-white text-xl font-bold">A</span>
           </div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Create your account</h1>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Start tracking your progress</p>
@@ -103,7 +103,7 @@ export default function SignupPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
                 required
-                className="w-full px-3 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+                className="w-full px-3 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
               />
             </div>
             <div>
@@ -115,7 +115,7 @@ export default function SignupPage() {
                 placeholder="At least 6 characters"
                 required
                 minLength={6}
-                className="w-full px-3 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+                className="w-full px-3 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
               />
             </div>
 
@@ -126,7 +126,7 @@ export default function SignupPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-2.5 bg-violet-600 text-white rounded-xl text-sm font-medium hover:bg-violet-700 transition-colors disabled:opacity-50"
+              className="w-full py-2.5 bg-amber-500 text-white rounded-xl text-sm font-medium hover:bg-amber-600 transition-colors disabled:opacity-50"
             >
               {loading ? "Creating account..." : "Create account"}
             </button>
@@ -135,7 +135,7 @@ export default function SignupPage() {
 
         <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-6">
           Already have an account?{" "}
-          <Link href="/login" className="text-violet-600 dark:text-violet-400 font-medium hover:underline">
+          <Link href="/login" className="text-amber-600 dark:text-amber-400 font-medium hover:underline">
             Sign in
           </Link>
         </p>
