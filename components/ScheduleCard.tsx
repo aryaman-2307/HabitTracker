@@ -34,9 +34,10 @@ interface ScheduleCardProps {
   onStatusChange?: (id: string, status: BlockStatus) => void;
   onDelete?: () => void;
   compact?: boolean;
+  readOnly?: boolean;
 }
 
-export default function ScheduleCard({ block, onStatusChange, onDelete }: ScheduleCardProps) {
+export default function ScheduleCard({ block, onStatusChange, onDelete, readOnly }: ScheduleCardProps) {
   return (
     <div className={`rounded-xl border border-gray-200/60 dark:border-gray-800 bg-white dark:bg-gray-900 p-3.5 border-l-4 shadow-sm ${getSubjectBorderClass(block.subject)}`}>
       <div className="flex items-start justify-between gap-2">
@@ -51,7 +52,7 @@ export default function ScheduleCard({ block, onStatusChange, onDelete }: Schedu
           {block.status}
         </span>
       </div>
-      {onStatusChange && (
+      {onStatusChange && !readOnly && (
         <div className="flex gap-1 mt-2.5">
           {(["completed", "skipped", "pending"] as BlockStatus[]).map((s) => (
             <button

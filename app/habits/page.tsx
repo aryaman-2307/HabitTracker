@@ -84,10 +84,13 @@ export default function HabitsPage() {
     ? habitStats.reduce((worst, h) => h.completionRate < worst.completionRate ? h : worst, habitStats[0])
     : null;
 
+  const today = getToday();
+
   const toggleHabit = (habitId: string) => {
     const habit = data.habits.find((h) => h.id === habitId);
     if (!habit) return;
     if (selectedDate < habit.startDate) return;
+    if (selectedDate !== today) return;
     const existing = data.habitLogs.find((l) => l.habitId === habitId && l.date === selectedDate);
     if (existing) {
       updateData((d) => ({
@@ -225,6 +228,8 @@ export default function HabitsPage() {
               );
               const streak = getStreak(habit.id);
               const beforeStart = selectedDate < habit.startDate;
+              const isPastDate = selectedDate < today;
+              const isDisabled = beforeStart || isPastDate;
               return (
                 <div
                   key={habit.id}
@@ -234,9 +239,9 @@ export default function HabitsPage() {
                 >
                   <button
                     onClick={() => toggleHabit(habit.id)}
-                    disabled={beforeStart}
+                    disabled={isDisabled}
                     className={`w-6 h-6 rounded-full border-2 flex items-center justify-center shrink-0 transition-colors ${
-                      beforeStart
+                      isDisabled
                         ? "border-gray-200 dark:border-gray-700 opacity-40 cursor-not-allowed"
                         : isCompleted
                         ? "bg-emerald-500 border-emerald-500 text-white"
@@ -254,6 +259,9 @@ export default function HabitsPage() {
                     </span>
                     {beforeStart && (
                       <p className="text-[10px] text-gray-400 mt-0.5">Habit starts on {habit.startDate}</p>
+                    )}
+                    {isPastDate && !beforeStart && (
+                      <p className="text-[10px] text-gray-400 mt-0.5">Past days can&apos;t be modified</p>
                     )}
                   </div>
                   <div className="flex items-center gap-3">

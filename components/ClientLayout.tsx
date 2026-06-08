@@ -1,9 +1,28 @@
 "use client";
 
 import { useEffect } from "react";
-import { AuthProvider } from "@/components/AuthProvider";
+import { usePathname, useRouter } from "next/navigation";
+import { AuthProvider, useAuth } from "@/components/AuthProvider";
 import { DataProvider, useData } from "@/components/DataProvider";
 import Sidebar from "@/components/Sidebar";
+
+function AuthRedirect({ children }: { children: React.ReactNode }) {
+  const { user, loading } = useAuth();
+  const pathname = usePathname();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!loading && user && (pathname === "/login" || pathname === "/signup")) {
+      router.replace("/");
+    }
+  }, [user, loading, pathname, router]);
+
+  if (!loading && user && (pathname === "/login" || pathname === "/signup")) {
+    return null;
+  }
+
+  return <>{children}</>;
+}
 
 function AppShell({ children }: { children: React.ReactNode }) {
   const { data, updateData } = useData();
@@ -34,7 +53,9 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   return (
     <AuthProvider>
       <DataProvider>
-        <AppShell>{children}</AppShell>
+        <AuthRedirect>
+          <AppShell>{children}</AppShell>
+        </AuthRedirect>
       </DataProvider>
     </AuthProvider>
   );

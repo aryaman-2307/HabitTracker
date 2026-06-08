@@ -161,7 +161,7 @@ export default function SchedulePage() {
               ) : (
                 dayBlocks.map((block) => (
                   <div key={block.id}>
-                    <ScheduleCard block={block} onStatusChange={handleStatusChange} onDelete={() => handleDelete(block.id)} />
+                    <ScheduleCard block={block} onStatusChange={handleStatusChange} onDelete={() => handleDelete(block.id)} readOnly={selectedDay < getToday()} />
                   </div>
                 ))
               )}
