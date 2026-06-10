@@ -32,11 +32,11 @@ export async function upsertUserSubjects(userId: string, subjects: UserSubject[]
     color: s.color,
     sort_order: s.order,
   }));
-  await supabase().from("user_subjects").upsert(rows, { onConflict: "id" });
+  await supabase().from("user_subjects").upsert(rows, { onConflict: "id" }).throwOnError();
 }
 
 export async function deleteUserSubject(id: string) {
-  await supabase().from("user_subjects").delete().eq("id", id);
+  await supabase().from("user_subjects").delete().eq("id", id).throwOnError();
 }
 
 // ============================================================
@@ -63,11 +63,11 @@ export async function upsertScheduleBlocks(userId: string, blocks: ScheduleBlock
     start_time: b.startTime, end_time: b.endTime,
     date: b.date, status: b.status, notes: b.notes || "",
   }));
-  await supabase().from("schedule_blocks").upsert(rows, { onConflict: "id" });
+  await supabase().from("schedule_blocks").upsert(rows, { onConflict: "id" }).throwOnError();
 }
 
 export async function deleteScheduleBlock(id: string) {
-  await supabase().from("schedule_blocks").delete().eq("id", id);
+  await supabase().from("schedule_blocks").delete().eq("id", id).throwOnError();
 }
 
 // ============================================================
@@ -92,31 +92,31 @@ export async function upsertTopics(userId: string, topics: Topic[]) {
     accuracy: t.accuracy, notes: t.notes, doubts: t.doubts,
     class_covered: t.classCovered, revision_needed: t.revisionNeeded,
   }));
-  await supabase().from("topics").upsert(rows, { onConflict: "id" });
+  await supabase().from("topics").upsert(rows, { onConflict: "id" }).throwOnError();
 }
 
 export async function deleteTopic(id: string) {
-  await supabase().from("topics").delete().eq("id", id);
+  await supabase().from("topics").delete().eq("id", id).throwOnError();
 }
 
 export async function deleteTopicsBySubject(userId: string, subjectName: string) {
   const norm = normalizeSubjectName(subjectName);
-  const { data: topics } = await supabase().from("topics").select("id").eq("user_id", userId);
+  const { data: topics } = await supabase().from("topics").select("id, subject").eq("user_id", userId).throwOnError();
   if (topics) {
     const toDelete = topics.filter((t: Row) => normalizeSubjectName(t.subject) === norm).map((t: Row) => t.id);
     if (toDelete.length > 0) {
-      await supabase().from("topics").delete().in("id", toDelete);
+      await supabase().from("topics").delete().in("id", toDelete).throwOnError();
     }
   }
 }
 
 export async function deleteClassNotesBySubject(userId: string, subjectName: string) {
   const norm = normalizeSubjectName(subjectName);
-  const { data: notes } = await supabase().from("class_notes").select("id").eq("user_id", userId);
+  const { data: notes } = await supabase().from("class_notes").select("id, subject").eq("user_id", userId).throwOnError();
   if (notes) {
     const toDelete = notes.filter((n: Row) => normalizeSubjectName(n.subject) === norm).map((n: Row) => n.id);
     if (toDelete.length > 0) {
-      await supabase().from("class_notes").delete().in("id", toDelete);
+      await supabase().from("class_notes").delete().in("id", toDelete).throwOnError();
     }
   }
 }
@@ -143,11 +143,11 @@ export async function upsertClassNotes(userId: string, notes: ClassNote[]) {
     summary: n.summary, doubts: n.doubts, understood: n.understood,
     needs_revision: n.needsRevision, tags: n.tags, file_metadata: n.fileMetadata || [],
   }));
-  await supabase().from("class_notes").upsert(rows, { onConflict: "id" });
+  await supabase().from("class_notes").upsert(rows, { onConflict: "id" }).throwOnError();
 }
 
 export async function deleteClassNote(id: string) {
-  await supabase().from("class_notes").delete().eq("id", id);
+  await supabase().from("class_notes").delete().eq("id", id).throwOnError();
 }
 
 // ============================================================
@@ -174,11 +174,11 @@ export async function upsertGymSessions(userId: string, sessions: GymSession[]) 
     notes: s.notes || "", cardio_distance: s.cardioDistance || null,
     cardio_duration: s.cardioDuration || null,
   }));
-  await supabase().from("gym_sessions").upsert(rows, { onConflict: "id" });
+  await supabase().from("gym_sessions").upsert(rows, { onConflict: "id" }).throwOnError();
 }
 
 export async function deleteGymSession(id: string) {
-  await supabase().from("gym_sessions").delete().eq("id", id);
+  await supabase().from("gym_sessions").delete().eq("id", id).throwOnError();
 }
 
 // ============================================================
@@ -197,9 +197,9 @@ export async function upsertStrengthHistory(userId: string, history: StrengthHis
     user_id: userId, date: h.date, exercise: h.exercise,
     weight: h.weight, reps: h.reps, set_number: h.setNumber,
   }));
-  await supabase().from("strength_history").delete().eq("user_id", userId);
+  await supabase().from("strength_history").delete().eq("user_id", userId).throwOnError();
   if (rows.length > 0) {
-    await supabase().from("strength_history").insert(rows);
+    await supabase().from("strength_history").insert(rows).throwOnError();
   }
 }
 
@@ -223,12 +223,12 @@ export async function upsertHabits(userId: string, habits: Habit[]) {
     icon: h.icon || null, target_days: h.targetDays,
     active: h.active, start_date: h.startDate,
   }));
-  await supabase().from("habits").upsert(rows, { onConflict: "id" });
+  await supabase().from("habits").upsert(rows, { onConflict: "id" }).throwOnError();
 }
 
 export async function deleteHabit(id: string) {
-  await supabase().from("habit_logs").delete().eq("habit_id", id);
-  await supabase().from("habits").delete().eq("id", id);
+  await supabase().from("habit_logs").delete().eq("habit_id", id).throwOnError();
+  await supabase().from("habits").delete().eq("id", id).throwOnError();
 }
 
 // ============================================================
@@ -249,11 +249,11 @@ export async function upsertHabitLogs(userId: string, logs: HabitLog[]) {
     date: l.date, completed: l.completed,
     value: l.value || null, notes: l.notes || "",
   }));
-  await supabase().from("habit_logs").upsert(rows, { onConflict: "id" });
+  await supabase().from("habit_logs").upsert(rows, { onConflict: "id" }).throwOnError();
 }
 
 export async function deleteHabitLog(id: string) {
-  await supabase().from("habit_logs").delete().eq("id", id);
+  await supabase().from("habit_logs").delete().eq("id", id).throwOnError();
 }
 
 // ============================================================
@@ -275,7 +275,7 @@ export async function upsertDailyLogs(userId: string, logs: DailyLog[]) {
     gym_completed: l.gymCompleted, habits_completed: l.habitsCompleted,
     mood: l.mood || null, energy: l.energy || null, notes: l.notes || "",
   }));
-  await supabase().from("daily_logs").upsert(rows, { onConflict: "user_id,date" });
+  await supabase().from("daily_logs").upsert(rows, { onConflict: "user_id,date" }).throwOnError();
 }
 
 // ============================================================
@@ -293,14 +293,14 @@ export async function fetchAiSuggestions(userId: string): Promise<Recommendation
 }
 
 export async function dismissAiSuggestion(id: string) {
-  await supabase().from("ai_suggestions").update({ dismissed: true }).eq("id", id);
+  await supabase().from("ai_suggestions").update({ dismissed: true }).eq("id", id).throwOnError();
 }
 
 // ============================================================
 // Full Sync
 // ============================================================
 export async function syncAllToSupabase(userId: string, data: AppData) {
-  await Promise.all([
+  const results = await Promise.allSettled([
     upsertUserSubjects(userId, data.subjects),
     upsertScheduleBlocks(userId, data.schedule),
     upsertTopics(userId, data.topics),
@@ -311,6 +311,12 @@ export async function syncAllToSupabase(userId: string, data: AppData) {
     upsertHabitLogs(userId, data.habitLogs),
     upsertDailyLogs(userId, data.dailyLogs),
   ]);
+  
+  results.forEach((res, i) => {
+    if (res.status === "rejected") {
+      console.error(`Sync failed for table index ${i}:`, res.reason);
+    }
+  });
 }
 
 export async function fetchAllFromSupabase(userId: string): Promise<AppData> {
