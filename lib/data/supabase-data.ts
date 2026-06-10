@@ -29,7 +29,6 @@ export async function upsertUserSubjects(userId: string, subjects: UserSubject[]
     id: s.id,
     user_id: userId,
     name: s.name,
-    normalized_name: s.normalizedName || normalizeSubjectName(s.name),
     color: s.color,
     sort_order: s.order,
   }));
